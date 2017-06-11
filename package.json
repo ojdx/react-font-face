@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/InfraRedDigital/foxtrot-core-lib.git"
+    "url": "git+https://github.com/ojdx/react-font-face.git"
   },
   "author": "ojdx",
   "dependencies": {
