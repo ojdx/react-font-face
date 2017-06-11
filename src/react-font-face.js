@@ -3,7 +3,7 @@ import {Helmet} from 'react-helmet';
 import bangersRegular from './Bangers-Regular.ttf'
 
 
-const ReactFontFace = _ => (
+const ReactFontFace = () => (
   <div>
     <Helmet>
         <style type='text/css' >{`
