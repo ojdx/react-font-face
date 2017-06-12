@@ -1,23 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Helmet} from 'react-helmet';
-import bangersRegular from './Bangers-Regular.ttf'
 
+function ReactFontFace(WrappedComponent, config){
+  return class extends Component{
+    constructor(props){
+      super(props);
+      //test for minimum and type to use
+      //file case
+      this.state = {
+        fontFamily: config.fontFamily,
+        fontStyle:  config.fontStyle,
+        fontWeight: config.fontWeight,
+        unicodeRange: config.unicodeRange,
+        file: config.file,
+        fontType: config.fontType,
+        fileLocal: config.fontLocal
 
-const ReactFontFace = () => (
-  <div>
-    <Helmet>
-        <style type='text/css' >{`
-            @font-face {
-            font-family: 'Bangers';
-            font-style: normal;
-            font-weight: 400;
-            src: local('Bangers Regular'), local('Bangers-Regular'), url(${bangersRegular}) format('truetype');
-            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
-            }
-        `}
-        </style>
-    </Helmet>
-  </div>
-);
-
-export default ReactFontFace;
+      }
+    }
+    render(){
+      return (
+        <div>
+          <Helmet>
+            <style type='text/css' >{`
+                @font-face {
+                  font-family: '${this.state.fontFamily}';
+                  font-style: '${this.state.fontStyle}';
+                  font-weight: '${this.state.fontWeight}';
+                  src: local(${this.state.fileLocal}), url(${this.state.file}) format('${this.state.fontType}');
+                  unicode-range: '${this.state.unicodeRange}';
+                }
+            `}
+            </style>
+          </Helmet>
+          <WrappedComponent {...this.props} />
+        </div>
+      )
+    }
+  }
+}
+export default ReactFontFace
