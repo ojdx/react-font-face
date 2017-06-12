@@ -7,29 +7,51 @@ function ReactFontFace(WrappedComponent, config){
       super(props);
       //test for minimum and type to use
       //file case
-      this.state = {
-        fontFamily: config.fontFamily,
-        fontStyle:  config.fontStyle,
-        fontWeight: config.fontWeight,
-        unicodeRange: config.unicodeRange,
-        file: config.file,
-        fontType: config.fontType,
-        fileLocal: config.fontLocal
 
+      this.state = {
+        google: config.google.length > 0 ? config.google : [],
+        file: config.file.length > 0 ? config.file : [],
+
+        // THE SHAPE OF EAH OBJECT WITHIN ARRAY
+        // fontFamily: config.fontFamily,
+        // fontStyle:  config.fontStyle,
+        // fontWeight: config.fontWeight,
+        // unicodeRange: config.unicodeRange,
+        // file: config.file,
+        // fontType: config.fontType,
+        // fileLocal: config.fontLocal
       }
     }
     render(){
+
+      const {
+        google,
+        file,
+      } = this.state
+
+      let fontListArray = file.map( (item) => {
+        return (
+          `@font-face {
+            font-family: '${item.fontFamily}';
+            font-style: '${item.fontStyle}';
+            font-weight: '${item.fontWeight}';
+            src: local(${item.fileLocal}), url(${item.file}) format('${item.fontType}');
+            unicode-range: '${item.unicodeRange}';
+          }`
+        )
+      });
+
+      // remove comma from array
+      let fontList = fontListArray.join("");
+      
+      // console.log("fontList", fontList);
+      // console.log("fontList", fontList.toString() );
+
       return (
         <div>
           <Helmet>
-            <style type='text/css' >{`
-                @font-face {
-                  font-family: '${this.state.fontFamily}';
-                  font-style: '${this.state.fontStyle}';
-                  font-weight: '${this.state.fontWeight}';
-                  src: local(${this.state.fileLocal}), url(${this.state.file}) format('${this.state.fontType}');
-                  unicode-range: '${this.state.unicodeRange}';
-                }
+            <style type='text/css' >{` 
+                ${fontList}
             `}
             </style>
           </Helmet>
