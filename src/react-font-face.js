@@ -14,10 +14,13 @@ function ReactFontFace(WrappedComponent, config){
       super(props);
       //test for minimum and type to use
       //file case
+      if(!config.google && !config.file){
+        throw Error('no fonts configured for react-font-face');
+      }
 
       this.state = {
-        google: config.google.length > 0 ? config.google : [],
-        file: config.file.length > 0 ? config.file : [],
+        google: config.google,
+        file: config.file,
 
         // THE SHAPE OF EAH OBJECT WITHIN ARRAY
         // fontFamily: config.fontFamily,
@@ -38,27 +41,32 @@ function ReactFontFace(WrappedComponent, config){
 
 
       // BUILD THE IMPORT FOR GOOFLE FONTS
-      let googleFontImportString = '';
-      for (let item in google) {
-        // TODO: dont add pipe on last item - doesnt break file request but Google doesnt use it in their wizard
-        googleFontImportString += `${google[item].replace(/ /g,"+")}|`
+      let googleImport = '';
+      if(google){
+        let googleFontImportString = '';
+        for (let item in google) {
+          // TODO: dont add pipe on last item - doesnt break file request but Google doesnt use it in their wizard
+          googleFontImportString += `${google[item].replace(/ /g,"+")}|`
+        }
+        googleImport = `@import url('https://fonts.googleapis.com/css?family=${googleFontImportString}');`
       }
-      let googleImport = `@import url('https://fonts.googleapis.com/css?family=${googleFontImportString}');`
-
-
+      
+      let fontList = '';
+      if(file){
+        let fontListArray = file.map( (item) => {
+          return (
+            `@font-face {
+              font-family: '${item.fontFamily}';
+              font-style: '${item.fontStyle}';
+              font-weight: '${item.fontWeight}';
+              src: local(${item.fileLocal}), url(${item.file}) format('${item.fontType}');
+              unicode-range: '${item.unicodeRange}';
+            }`
+          )
+        });
+        fontList = fontListArray.join("");
+      }
       // BUILD THE DECLARATION FOR LOCAL FILES
-      let fontListArray = file.map( (item) => {
-        return (
-          `@font-face {
-            font-family: '${item.fontFamily}';
-            font-style: '${item.fontStyle}';
-            font-weight: '${item.fontWeight}';
-            src: local(${item.fileLocal}), url(${item.file}) format('${item.fontType}');
-            unicode-range: '${item.unicodeRange}';
-          }`
-        )
-      });
-      let fontList = fontListArray.join("");
 
       return (
         <div>
