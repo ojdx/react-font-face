@@ -43,6 +43,15 @@ const styles = {
     fontFamily: ' "Mogra" ',
     opacity: 0.5,
   },
+  google1: {
+    fontFamily: 'Pangolin',
+  },
+  google2: {
+    fontFamily: 'Roboto Mono',
+  },
+  google3: {
+    fontFamily: 'Indie Flower',
+  },
 };
 
 const log = () => console.log('Welcome to storybook!');
@@ -65,7 +74,7 @@ class Welcome extends React.Component {
         <p>
           This is a UI component dev environment for your app.
         </p>
-        <p>
+        <p style={ styles.google1 }>
           We've added some basic stories inside the
           {' '}
           <code style={styles.code}>src/stories</code>
@@ -77,7 +86,7 @@ class Welcome extends React.Component {
           <br />
           (Basically a story is like a visual test case.)
         </p>
-        <p>
+        <p style={ styles.google2 }>
           See these sample
           {' '}
           <a style={styles.link} onClick={this.clickHandler} role="button" tabIndex="0">stories</a>
@@ -87,7 +96,7 @@ class Welcome extends React.Component {
           <code style={styles.code}>Button</code>
           .
         </p>
-        <p>
+        <p style={ styles.google3 }>
           Just like that, you can add your own components as stories.
           <br />
           You can also edit those components and see changes right away.
@@ -134,7 +143,11 @@ class Welcome extends React.Component {
 // };
 
 let fontConfig = {
-  google: [],
+  google: [
+    'Pangolin',
+    'Roboto Mono',
+    'Indie Flower',
+  ],
   file: [
     {
       fontFamily: 'Bangers',
