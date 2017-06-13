@@ -141,8 +141,14 @@ class Welcome extends React.Component {
 // Welcome.defaultProps = {
 //   showApp: log,
 // };
-
-let fontConfig = {
+let fontConfig ={
+    google: [
+    'Pangolin',
+    'Roboto Mono',
+    'Indie Flower',
+  ],
+}
+let fontConfig2 = {
   google: [
     'Pangolin',
     'Roboto Mono',
