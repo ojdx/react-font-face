@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies, import/no-unresolved, import/extensions */
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactFontFace from '../src/react-font-face'
 import bangersFont from './Bangers-Regular.ttf'
@@ -54,9 +54,7 @@ const styles = {
   },
 };
 
-const log = () => console.log('Welcome to storybook!');
-
-class Welcome extends React.Component {
+class Welcome extends Component {
   constructor(props) {
     super(props);
     this.clickHandler = event => {
