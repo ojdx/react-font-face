@@ -1,6 +1,6 @@
 {
   "name": "react-font-face",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "@font-face handler for component developer",
   "main": "lib/react-font-face.js",
   "license": "UNLICENSED",
