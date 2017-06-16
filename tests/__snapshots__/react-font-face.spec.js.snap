@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`React Font Face Component --  - matches snapshot 1`] = `
+<div>
+  <HelmetWrapper
+    encodeSpecialCharacters={true}
+  >
+    <style
+      type="text/css"
+    >
+       
+                      @import url('https://fonts.googleapis.com/css?family=Indie+Flower|');
+                      
+                  
+    </style>
+  </HelmetWrapper>
+  <DummyComponent />
+</div>
+`;

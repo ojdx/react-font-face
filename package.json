@@ -1,15 +1,50 @@
 {
   "name": "react-font-face",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "@font-face handler for component developer",
   "main": "lib/react-font-face.js",
   "license": "UNLICENSED",
   "scripts": {
     "compile": "babel -d lib/ src/",
     "prepublish": "npm run compile",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node scripts/test.js --env=jsdom",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/../../node_modules/"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js",
+      "<rootDir>/config/setup.js"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/enzyme-to-json/serializer"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.js?(x)",
+      "<rootDir>/src/**/?(*.)(spec|test).js?(x)",
+      "<rootDir>/tests/**/?(*.)(spec|test).js?(x)"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "verbose": true,
+    "moduleNameMapper": {
+      "^react-native$": "react-native-web"
+    }
   },
   "repository": {
     "type": "git",
@@ -23,13 +58,22 @@
     "react-helmet": "^5.1.3"
   },
   "devDependencies": {
+    "@storybook/react": "^3.1.3",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
+    "babel-jest": "^20.0.3",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
     "babel-preset-react": "^6.11.1",
-    "@storybook/react": "^3.1.3"
+    "babel-preset-stage-0": "^6.24.1",
+    "chai": "^4.0.2",
+    "enzyme": "^2.8.2",
+    "enzyme-to-json": "^1.5.1",
+    "jest": "^20.0.4",
+    "jsdom": "^11.0.0",
+    "react-addons-test-utils": "^15.6.0",
+    "react-test-renderer": "^15.6.1",
+    "sinon": "^2.3.4"
   }
 }
